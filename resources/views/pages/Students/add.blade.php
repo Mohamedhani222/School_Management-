@@ -28,7 +28,7 @@
                         </div>
                     @endif
 
-                    <form method="post"  action="{{ route('students.store') }}" autocomplete="off">
+                    <form method="post"  action="{{ route('students.store') }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
                         <h6 style="font-family: 'Cairo', sans-serif;color: blue">{{trans('Students_trans.personal_information')}}</h6><br>
                         <div class="row">

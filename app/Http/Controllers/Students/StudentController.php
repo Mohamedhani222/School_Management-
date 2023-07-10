@@ -8,6 +8,7 @@ use App\Models\Classroom;
 use App\Models\Grade;
 use App\Repository\StudentRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -32,12 +33,14 @@ class StudentController extends Controller
 
     public function store(StoreStudentsRequest $request)
     {
+        DB::beginTransaction();
         try {
             $this->student->Store_Student($request);
+            DB::commit();
             toastr()->success(trans('messages.success'));
             return redirect()->route('students.index');
-
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
