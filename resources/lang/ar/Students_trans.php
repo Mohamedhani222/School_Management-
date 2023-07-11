@@ -25,7 +25,7 @@ return [
     'Close' => 'اغلاق',
     'Deleted_Student' => 'حذف بيانات الطالب',
     'Deleted_Student_tilte' => 'هل انت متأكد من حذف الطالب ؟',
-    'Attachments' => 'المرفقات'
-
+    'Attachments' => 'المرفقات',
+    'export_students' => ' حفظ الطلاب excel'
 
 ];

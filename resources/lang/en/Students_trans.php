@@ -24,6 +24,7 @@ return [
     'Close' => 'Close',
     'Deleted_Student' => 'Delete student data',
     'Deleted_Student_tilte' => 'Are you sure to delete the student ?',
-    'Attachments' => 'Attachments'
+    'Attachments' => 'Attachments',
+    'export_students' =>'Export students (excel)',
 
 ];

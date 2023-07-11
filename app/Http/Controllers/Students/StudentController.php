@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Students;
 
+use App\Exports\StudentsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentsRequest;
-use App\Models\Classroom;
-use App\Models\Grade;
 use App\Repository\StudentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class StudentController extends Controller
 {
@@ -54,6 +56,19 @@ class StudentController extends Controller
     {
         return $this->student->Edit_Student($id);
     }
+
+    public function export_students()
+    {
+        try {
+
+            return $this->student->export_students();
+        }catch (ValidationException $e){
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
+        }
+
+    }
+
 
 
     public function update(StoreStudentsRequest $request)

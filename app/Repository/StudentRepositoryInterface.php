@@ -22,4 +22,5 @@ interface StudentRepositoryInterface
 
     public function Get_sections($id);
 
+    public function export_students();
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Exports\StudentsExport;
 use App\Models\Blood;
 use App\Models\Classroom;
 use App\Models\Gender;
@@ -17,6 +18,7 @@ use App\Repository\TeacherRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentRepository implements StudentRepositoryInterface
 {
@@ -73,7 +75,7 @@ class StudentRepository implements StudentRepositoryInterface
 
                 $images = new Image();
                 $images->filename = $name;
-                $images->imageable_id= $student->id;
+                $images->imageable_id = $student->id;
                 $images->imageable_type = 'App\Models\Student';
                 $images->save();
             }
@@ -100,6 +102,7 @@ class StudentRepository implements StudentRepositoryInterface
 
     }
 
+
     public function Delete_Student($request)
     {
         Student::findorFail($request->id)->delete();
@@ -118,4 +121,11 @@ class StudentRepository implements StudentRepositoryInterface
         return $list_sections;
 
     }
+
+
+    public function export_students()
+    {
+        return Excel::download(new StudentsExport(), 'students.xlsx');
+    }
+
 }

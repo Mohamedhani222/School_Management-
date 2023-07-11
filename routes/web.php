@@ -44,9 +44,11 @@ Route::group(
 
 
     // Students
-        Route::resource('students' , StudentController::class);
-        Route::get('Get_classrooms/{id}' , [StudentController::class , 'Get_classrooms']);
-        Route::get('Get_Sections/{id}' , [StudentController::class , 'Get_sections']);
+    Route::resource('students', StudentController::class);
+    Route::get('Get_classrooms/{id}', [StudentController::class, 'Get_classrooms']);
+    Route::get('Get_Sections/{id}', [StudentController::class, 'Get_sections']);
+    Route::get('/export/', [StudentController::class, 'export_students'])->name('export');
+
 });
 
 
