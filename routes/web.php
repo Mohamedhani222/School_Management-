@@ -48,7 +48,7 @@ Route::group(
     Route::get('Get_classrooms/{id}', [StudentController::class, 'Get_classrooms']);
     Route::get('Get_Sections/{id}', [StudentController::class, 'Get_sections']);
     Route::get('/export/', [StudentController::class, 'export_students'])->name('export');
-
+    Route::post('/upload_attachment' , [StudentController::class ,'add_attachment'])->name('Upload_attachment');
 });
 
 

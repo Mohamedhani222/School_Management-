@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Students;
 
 use App\Exports\StudentsExport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImageRequest;
 use App\Http\Requests\StoreStudentsRequest;
+use App\Models\Student;
 use App\Repository\StudentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,8 +51,21 @@ class StudentController extends Controller
 
     public function show(string $id)
     {
-        //
+        return $this->student->Show_Student($id);
     }
+
+
+    public function add_attachment(ImageRequest $request)
+    {
+        try {
+            $this->student->add_attachment($request);
+            toastr()->success(trans('messages.success'));
+            return redirect()->route('students.show' , $request->student_id);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
 
     public function edit(string $id)
     {
@@ -62,14 +77,12 @@ class StudentController extends Controller
         try {
 
             return $this->student->export_students();
-        }catch (ValidationException $e){
+        } catch (ValidationException $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }
 
     }
-
-
 
     public function update(StoreStudentsRequest $request)
     {

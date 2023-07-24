@@ -11,17 +11,14 @@ use App\Models\Image;
 use App\Models\My_Parent;
 use App\Models\Nationalitie;
 use App\Models\Section;
-use App\Models\Specialization;
 use App\Models\Student;
-use App\Models\Teacher;
-use App\Repository\TeacherRepositoryInterface;
-use Exception;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Maatwebsite\Excel\Facades\Excel;
 
 class StudentRepository implements StudentRepositoryInterface
 {
+
+    protected bool $image_exist;
 
     public function Get_Students()
     {
@@ -68,18 +65,7 @@ class StudentRepository implements StudentRepositoryInterface
         $student->academic_year = $request->academic_year;
         $student->save();
 
-        if ($request->hasfile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $name = $photo->getClientOriginalName();
-                $photo->storeAs('attachments/students' . $student->name, $name, 'upload_attachments');
-
-                $images = new Image();
-                $images->filename = $name;
-                $images->imageable_id = $student->id;
-                $images->imageable_type = 'App\Models\Student';
-                $images->save();
-            }
-        }
+        $this->extracted($request, $student);
 
     }
 
@@ -102,6 +88,12 @@ class StudentRepository implements StudentRepositoryInterface
 
     }
 
+    public function add_attachment($request)
+    {
+        $student = Student::find($request->student_id);
+
+        $this->extracted($request, $student);
+    }
 
     public function Delete_Student($request)
     {
@@ -122,10 +114,44 @@ class StudentRepository implements StudentRepositoryInterface
 
     }
 
+    public function Show_Student($id)
+    {
+        $Student = Student::findorFail($id);
+        return view('pages.Students.show', compact('Student'));
+    }
 
     public function export_students()
     {
         return Excel::download(new StudentsExport(), 'students.xlsx');
+    }
+
+
+    public function extracted($request, $student)
+    {
+        $error = false;
+        if ($request->hasfile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $name = $photo->getClientOriginalName();
+                $image = $student->images()->where('filename', $name)->exists();
+                if ($image) {
+                    $error = true;
+                } else {
+                    $photo->storeAs('attachments/students' . $student->name, $name, 'upload_attachments');
+                    $images = new Image();
+                    $images->filename = $name;
+                    $images->imageable_id = $student->id;
+                    $images->imageable_type = 'App\Models\Student';
+                    $images->save();
+                }
+            }
+            if ($error) {
+                return redirect()->back()->withErrors(['error' => 'One or more files already exist']);
+            }
+        } else {
+            return redirect()->back()->withErrors(['error' => 'No files uploaded']);
+        }
+        toastr()->success(trans('messages.success'));
+        return redirect()->back()->with('success', 'Files uploaded successfully');
     }
 
 }

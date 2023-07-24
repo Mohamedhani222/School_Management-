@@ -26,5 +26,8 @@ return [
     'Deleted_Student_tilte' => 'Are you sure to delete the student ?',
     'Attachments' => 'Attachments',
     'export_students' =>'Export students (excel)',
+    'Student_details' => 'Student Details',
+    'Download' => 'download',
+    'delete' => 'delete',
 
 ];
