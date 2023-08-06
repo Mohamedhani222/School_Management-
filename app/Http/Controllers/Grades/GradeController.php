@@ -92,9 +92,8 @@ class GradeController extends Controller
             toastr()->error(trans('grades_trans.classes_warning'));
             return redirect()->route('grades.index');
         }
+        $grade->delete();
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('grades.index');
-
-
     }
 }

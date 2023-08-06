@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Exports\StudentsExport;
+use App\interfaces\StudentRepositoryInterface;
 use App\Models\Blood;
 use App\Models\Classroom;
 use App\Models\Gender;
@@ -13,6 +14,7 @@ use App\Models\Nationalitie;
 use App\Models\Section;
 use App\Models\Student;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class StudentRepository implements StudentRepositoryInterface
@@ -136,7 +138,7 @@ class StudentRepository implements StudentRepositoryInterface
                 if ($image) {
                     $error = true;
                 } else {
-                    $photo->storeAs('attachments/students' . $student->name, $name, 'upload_attachments');
+                    $photo->storeAs('attachments/students/' . $student->name, $name, 'upload_attachments');
                     $images = new Image();
                     $images->filename = $name;
                     $images->imageable_id = $student->id;
@@ -151,7 +153,22 @@ class StudentRepository implements StudentRepositoryInterface
             return redirect()->back()->withErrors(['error' => 'No files uploaded']);
         }
         toastr()->success(trans('messages.success'));
-        return redirect()->back()->with('success', 'Files uploaded successfully');
+        return redirect()->back();
+    }
+
+
+    public function download_attachment($studentsname, $filename)
+    {
+        return response()->download(public_path('attachments\students\\' . $studentsname . '\\' . $filename));
+    }
+
+    public function delete_attachment($request)
+    {
+        Storage::disk('upload_attachments')->delete('attachments/students/' . $request->student_name . '/' . $request->filename);
+        Image::where('id', $request->id)->where('filename', $request->filename)->delete();
+        toastr()->error(trans('messages.Delete'));
+        return redirect()->route('students.show', $request->student_id);
+
     }
 
 }

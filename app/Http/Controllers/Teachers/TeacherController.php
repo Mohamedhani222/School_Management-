@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Teachers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeachers;
-use App\Models\Gender;
-use App\Models\Specialization;
+use App\interfaces\TeacherRepositoryInterface;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
-use App\Repository\TeacherRepositoryInterface;
 
 class TeacherController extends Controller
 {

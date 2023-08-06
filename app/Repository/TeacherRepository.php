@@ -2,13 +2,12 @@
 
 namespace App\Repository;
 
+use App\interfaces\TeacherRepositoryInterface;
 use App\Models\Gender;
 use App\Models\Specialization;
 use App\Models\Teacher;
-use App\Repository\TeacherRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 class TeacherRepository implements TeacherRepositoryInterface
 {

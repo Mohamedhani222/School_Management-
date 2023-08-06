@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('css')
+
     @section('title')
         {{trans('Students_trans.Student_details')}}
     @stop
@@ -127,7 +128,7 @@
                                                     <td>{{$attachment->created_at->diffForHumans()}}</td>
                                                     <td colspan="2">
                                                         <a class="btn btn-outline-info btn-sm"
-                                                           href="{{url('Download_attachment')}}/{{ $attachment->imageable->name }}/{{$attachment->filename}}"
+                                                           href="{{url('download_attachment')}}/{{ $attachment->imageable->name }}/{{$attachment->filename}}"
                                                            role="button"><i
                                                                 class="fas fa-download"></i>&nbsp; {{trans('Students_trans.Download')}}
                                                         </a>

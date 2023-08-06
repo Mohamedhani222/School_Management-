@@ -29,5 +29,17 @@ return [
     'Student_details' => 'Student Details',
     'Download' => 'download',
     'delete' => 'delete',
+    'Delete_attachment' => 'Delete_attachment',
+    'Delete_attachment_tilte' => 'Are you sure to delete the attachment?',
+    'filename' => 'filename',
+    'created_at' => 'created_at',
+    'no_data' =>'There is no students with this data',
+    'promotion_error' => 'You Can\'t promote students to the same grade !',
+    'from_grade' => 'from grade',
+    'to_grade' => 'to grade',
+    'from_class' => 'from class',
+    'to_class' => 'to class',
+    'from_section' => 'from section',
+    'to_section' => 'to section',
 
 ];

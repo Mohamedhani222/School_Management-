@@ -29,6 +29,14 @@ return [
     'Home' => 'الصفحة الرئيسية',
     'list_teachers' => 'قائمة المدرسين',
     'add_new_student' => 'اضافة طالب',
-    'list_students'=> 'قائمة الطلاب' ,
+    'list_students' => 'قائمة الطلاب',
+    'Students_Promotions' => 'ترقية الطلاب',
+    'add_Promotion' => 'اضافة ترقية جديدة',
+    'list_Promotions' => 'قائمة الترقيات',
+    'Graduate_students' => 'الطلاب المتخرجين',
+    'add_Graduate' => 'اضافة تخرج جديد',
+    'list_Graduate' => 'قائمة التخرجات',
+    'Student_information' => 'معلومات الطلاب',
+
 
 ];

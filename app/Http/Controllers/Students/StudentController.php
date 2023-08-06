@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Students;
 
-use App\Exports\StudentsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
 use App\Http\Requests\StoreStudentsRequest;
-use App\Models\Student;
-use App\Repository\StudentRepositoryInterface;
+use App\interfaces\StudentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Validators\ValidationException;
 
 class StudentController extends Controller
@@ -60,7 +56,7 @@ class StudentController extends Controller
         try {
             $this->student->add_attachment($request);
             toastr()->success(trans('messages.success'));
-            return redirect()->route('students.show' , $request->student_id);
+            return redirect()->route('students.show', $request->student_id);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -75,7 +71,6 @@ class StudentController extends Controller
     public function export_students()
     {
         try {
-
             return $this->student->export_students();
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -118,5 +113,16 @@ class StudentController extends Controller
     {
         return $this->student->Get_sections($id);
 
+    }
+
+    public function download_attachment($studentsname, $filename)
+    {
+
+        return $this->student->download_attachment($studentsname, $filename);
+    }
+
+    public function delete_attachment(Request $request)
+    {
+        return $this->student->delete_attachment($request);
     }
 }

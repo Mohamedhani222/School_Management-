@@ -22,7 +22,6 @@
 <script src="{{ URL::asset('assets/js/sweetalert2.js') }}"></script>
 <!-- toastr -->
 @yield('js')
-<script src="{{ URL::asset('assets/js/toastr.js') }}"></script>
 <!-- validation -->
 <script src="{{ URL::asset('assets/js/validation.js') }}"></script>
 <!-- lobilist -->
@@ -31,4 +30,116 @@
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 <script src="https://kit.fontawesome.com/bae9a9ef6b.js" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $('select[name="Grade_id"]').on('change', function () {
+            var Grade_id = $(this).val();
+            if (Grade_id) {
+                $.ajax({
+                    url: "{{ URL::to('Get_classrooms') }}/" + Grade_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('select[name="Classroom_id"]').empty();
+                        $('select[name="Classroom_id"]').append('<option selected disabled>{{trans('Parent_trans.Choose')}}...</option>')
+                        $.each(data, function (key, value) {
+                            $('select[name="Classroom_id"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
 
+                    },
+                });
+            }
+
+            else {
+                console.log('AJAX load did not work');
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('select[name="Classroom_id"]').on('change', function () {
+            var Classroom_id = $(this).val();
+            if (Classroom_id) {
+                $.ajax({
+                    url: "{{ URL::to('Get_Sections') }}/" + Classroom_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('select[name="section_id"]').empty();
+                        $('select[name="section_id"]').append('<option selected disabled>{{trans('Parent_trans.Choose')}}...</option>')
+
+                        $.each(data, function (key, value) {
+                            $('select[name="section_id"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
+
+                    },
+                });
+            }
+
+            else {
+                console.log('AJAX load did not work');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('select[name="Grade_id_new"]').on('change', function () {
+            var Grade_id = $(this).val();
+            if (Grade_id) {
+                $.ajax({
+                    url: "{{ URL::to('Get_classrooms') }}/" + Grade_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('select[name="Classroom_id_new"]').empty();
+                        $('select[name="Classroom_id_new"]').append('<option selected disabled>{{trans('Parent_trans.Choose')}}...</option>')
+
+                        $.each(data, function (key, value) {
+                            $('select[name="Classroom_id_new"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
+
+                    },
+                });
+            }
+
+            else {
+                console.log('AJAX load did not work');
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('select[name="Classroom_id_new"]').on('change', function () {
+            var Classroom_id = $(this).val();
+            if (Classroom_id) {
+                $.ajax({
+                    url: "{{ URL::to('Get_Sections') }}/" + Classroom_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('select[name="section_id_new"]').empty();
+                        $('select[name="section_id_new"]').append('<option selected disabled>{{trans('Parent_trans.Choose')}}...</option>')
+
+                        $.each(data, function (key, value) {
+                            $('select[name="section_id_new"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
+
+                    },
+                });
+            }
+
+            else {
+                console.log('AJAX load did not work');
+            }
+        });
+    });
+</script>

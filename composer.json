@@ -15,6 +15,7 @@
         "livewire/livewire": "^2.12",
         "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^1.8",
+        "php-flasher/flasher-laravel": "^1.15",
         "spatie/laravel-translatable": "^6.4",
         "yoeunes/toastr": "^2.3"
     },

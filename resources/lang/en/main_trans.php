@@ -27,6 +27,16 @@ return [
     'List_Parent' => "List Parents",
     'Add_Parent' => 'Add Parent',
     'list_teachers' => 'List Teachers',
-    'add_new_student' =>'Add Student',
-    'list_students'=> 'List Student',
+    'add_new_student' => 'Add Student',
+    'list_students' => 'List Student',
+    'list_Promotions' => 'Promotions List',
+    'Students_Promotions' => 'Students Promotions',
+    'information_student' => 'Information Students',
+    'Students_upgrade' => 'Students Upgrade',
+    'Graduate_students' => 'Graduate Students',
+    'add_Promotion' => 'Add Promotion',
+    'Student_information' => 'Student Information' ,
+    'add_Graduate' => 'Add Graduate',
+    'list_Graduate' => 'Graduates List',
+
 ];

@@ -30,4 +30,19 @@ return [
     'Student_details' => 'معلومات الطالب',
     'Download' => 'تحميل',
     'delete' => 'حذف',
+    'filename' => 'اسم الملف',
+    'Delete_attachment' => 'حذف مرفق',
+    'Delete_attachment_tilte' => 'هل انت متأكد من حذف المرفق ؟',
+    'created_at' => 'تاريخ الاضافة',
+    'no_data' => 'لاتوجد بيانات في جدول الطلاب',
+    'promotion_error' => 'لايمكن نقل الطلاب الي نفس المرحله',
+    'from_grade' => ' المرحله الدراسيه السابقه',
+    'to_grade' => 'المرحله الدراسيه الحاليه',
+    'from_class' => 'الصف السابق',
+    'to_class' => 'السف الحالي',
+    'from_section' => ' القسم السابق',
+    'to_section' => 'القسم الحالي',
+
 ];
+
+
