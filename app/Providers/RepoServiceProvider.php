@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\interfaces\FeesInvoicesRepositoryInterface;
+use App\interfaces\FeesRepositoryInterface;
 use App\interfaces\GraduatedRepositoryInterface;
 use App\interfaces\StudentPromotionRepositoryInterface;
 use App\interfaces\StudentRepositoryInterface;
 use App\interfaces\TeacherRepositoryInterface;
+use App\Repository\FeesInvoicesRepository;
+use App\Repository\FeesRepository;
 use App\Repository\GraduatedRepository;
 use App\Repository\StudentPromotionRepository;
 use App\Repository\StudentRepository;
@@ -14,9 +18,7 @@ use Illuminate\Support\ServiceProvider;
 
 class RepoServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
+
     public function register(): void
     {
         $this->app->bind(
@@ -35,11 +37,17 @@ class RepoServiceProvider extends ServiceProvider
             GraduatedRepositoryInterface::class,
             GraduatedRepository::class,
         );
+        $this->app->bind(
+            FeesRepositoryInterface::class,
+            FeesRepository::class,
+        );
+        $this->app->bind(
+            FeesInvoicesRepositoryInterface::class,
+            FeesInvoicesRepository::class,
+        );
     }
 
-    /**
-     * Bootstrap services.
-     */
+
     public function boot(): void
     {
         //

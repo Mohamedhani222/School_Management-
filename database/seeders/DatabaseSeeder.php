@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\My_Parent;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,13 +21,14 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
+            UserSeeder::class,
             BloodSeeder::class,
             NationalitieSeeder::class,
             ReligionSeeder::class,
-            UserSeeder::class,
             SpecializationSeeder::class,
             GenderSeeder::class,
             AllGradesInfoSeedr::class,
+            ParentSeeder::class,
             StudentSeeder::class,
         ]);
     }

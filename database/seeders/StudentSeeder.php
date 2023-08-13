@@ -8,6 +8,7 @@ use App\Models\Gender;
 use App\Models\Grade;
 use App\Models\My_Parent;
 use App\Models\Nationalitie;
+use App\Models\Religion;
 use App\Models\Section;
 use App\Models\Student;
 use Carbon\Carbon;
@@ -26,8 +27,6 @@ class StudentSeeder extends Seeder
 
         $blood_ids = Blood::pluck('id');
         $nationalitie_ids = Nationalitie::pluck('id');
-        $Classroom_ids = Classroom::pluck('id');
-        $section_ids = Section::pluck('id');
         $parent_ids = My_Parent::pluck('id');
         $Grade_ids = Grade::pluck('id');
         $names = [
@@ -117,29 +116,39 @@ class StudentSeeder extends Seeder
         ];
 
 
+
+
         $ac_years = [
             date("Y"),
             date("Y", strtotime("+1 years")),
             date("Y", strtotime("+2 years")),
         ];
 
+
+
+
         foreach ($names as $name) {
+            $g_id = $Grade_ids->random();
+            $grade_classes_id = Classroom::where('Grade_id', $g_id)->pluck('id')->unique()->random();
+            $sections_class = Section::where('Classroom_id' , $grade_classes_id)->pluck('id')->unique()->random();
+
             Student::create([
                 'name' => $name,
                 'email' => fake()->unique()->safeEmail(),
                 'password' => Hash::make('12345678'),
                 'gender_id' => Gender::first()->id,
                 'blood_id' => $blood_ids->random(),
+                'Grade_id' => $g_id,
+                'Classroom_id' => $grade_classes_id,
+                'section_id' => $sections_class,
                 'nationalitie_id' => $nationalitie_ids->random(),
-                'Classroom_id' => $Classroom_ids->random(),
-                'section_id' => $section_ids->random(),
                 'parent_id' => $parent_ids->random(),
-                'Grade_id' => $Grade_ids->random(),
                 'Date_Birth' => fake()->date(),
                 'academic_year' => $ac_years[rand(0, 1)]
             ]);
 
         }
+
 
 
     }
