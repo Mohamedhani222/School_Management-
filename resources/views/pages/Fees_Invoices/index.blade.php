@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('css')
-    @toastr_css
     @section('title')
         الفواتير الدراسية
     @stop
@@ -48,10 +47,15 @@
                                                 <td>{{$Fee_invoice->classroom->Name_class}}</td>
                                                 <td>{{Str::limit($Fee_invoice->notes,50)}}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-info btn-sm" role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
-                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#" ><i class="fa fa-trash"></i></button>
+                                                    <a href="{{route('invoices.edit' ,$Fee_invoice->id )}}"
+                                                       class="btn btn-info btn-sm" role="button" aria-pressed="true"><i
+                                                            class="fa fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                            data-toggle="modal" data-target="#Delete_Fee_invoice{{$Fee_invoice->id}}"><i
+                                                            class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
+                                        @include('pages.Fees_Invoices.Delete')
                                         @endforeach
                                     </table>
                                 </div>

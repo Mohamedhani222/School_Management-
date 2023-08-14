@@ -39,23 +39,19 @@ class FeeInvoicesController extends Controller
 
     }
 
-    public function edit(FeeInvoices $feeInvoices)
+    public function edit($id)
     {
-        //
+        return $this->fees_invoices->edit($id);
     }
 
-    public function update(Request $request, FeeInvoices $feeInvoices)
+    public function update(Request $request)
     {
-        //
+        return $this->fees_invoices->update($request);
     }
 
-    public function destroy(FeeInvoices $feeInvoices)
+    public function destroy(Request $request)
     {
-        //
+        return $this->fees_invoices->destroy($request);
     }
 
-    public function Get_amounts($id)
-    {
-        return Fee::findorFail($id)->pluck('id','amount');
-    }
 }

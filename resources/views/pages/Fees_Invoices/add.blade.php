@@ -49,25 +49,25 @@
                                                     <select class="custom-select mr-sm-2 " name="fee_id" id="fee_id" required>
                                                         <option value="">-- اختار من القائمة --</option>
                                                         @foreach($fees as $fee)
-                                                            <option value="{{ $fee->id }}">{{ $fee->title }}</option>
+                                                            <option value="{{ $fee->id }}">{{ $fee->title }} ({{$fee->amount}} egp)</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
                                             </div>
 
-                                            <div class="col">
-                                                <label for="amount_id" class="mr-sm-2">المبلغ</label>
-                                                <div class="box">
-                                                    <select class="custom-select mr-sm-2 " name="amount_id" id="amount_id" >
-                                                        <option value="">-- اختار من القائمة --</option>
-                                                        @foreach($fees as $fee)
-                                                            <option value="{{ $fee->amount }}">{{ $fee->amount }}</option>
-                                                        @endforeach
+{{--                                            <div class="col">--}}
+{{--                                                <label for="amount_id" class="mr-sm-2">المبلغ</label>--}}
+{{--                                                <div class="box">--}}
+{{--                                                    <select class="custom-select mr-sm-2 " name="amount_id" id="amount_id" >--}}
+{{--                                                        <option value="">-- اختار من القائمة --</option>--}}
+{{--                                                        @foreach($fees as $fee)--}}
+{{--                                                            <option value="{{ $fee->amount }}">{{ $fee->amount }}</option>--}}
+{{--                                                        @endforeach--}}
 
-                                                    </select>
-                                                </div>
-                                            </div>
+{{--                                                    </select>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
                                             <div class="col">
                                                 <label for="description" class="mr-sm-2">البيان</label>
@@ -110,30 +110,5 @@
 @endsection
 @section('js')
 
-{{--    <script>--}}
-{{--        $(document).ready(function () {--}}
-{{--            $('#fee_id').on('change', function () {--}}
-{{--                var fee_id = $(this).val();--}}
-{{--                console.log(fee_id);--}}
-{{--                if (fee_id) {--}}
-{{--                    $.ajax({--}}
-{{--                        url: "{{ URL::to('Get_amounts') }}/" + fee_id,--}}
-{{--                        type: 'GET',--}}
-{{--                        datatype: 'json',--}}
-{{--                        success: function (data) {--}}
-{{--                            $.each(data, function (key, value) {--}}
-{{--                                $('#amount_id').empty();--}}
-{{--                                $('#amount_id').append('<option value="' + key + '">' + key + '</option>');--}}
-{{--                            });--}}
-{{--                        }--}}
-{{--                    });--}}
-{{--                } else {--}}
-{{--                    console.log('error ajax')--}}
-{{--                }--}}
-
-{{--            });--}}
-{{--        });--}}
-
-{{--    </script>--}}
 
 @endsection
